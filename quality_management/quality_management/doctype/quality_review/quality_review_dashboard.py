@@ -2,11 +2,11 @@ from frappe import _
 
 def get_data():
     return {
-        'fieldname': 'quality_review',
+        'fieldname': 'procedure',
         'transactions': [
             {
                 'label': _('Dummy'),
-                'items': ['ToDo', 'Note']
+                'items': ['Quality Goal', 'Procedure']
             }
         ],
     }
