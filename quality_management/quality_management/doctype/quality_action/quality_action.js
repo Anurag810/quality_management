@@ -4,5 +4,8 @@
 frappe.ui.form.on('Quality Action', {
 	refresh: function(frm) {
 
+	},
+	procedure: function(frm) {
+		frm.set_value("date", frappe.datetime.get_today())
 	}
 });
