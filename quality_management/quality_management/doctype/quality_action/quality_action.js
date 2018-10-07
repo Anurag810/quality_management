@@ -7,5 +7,14 @@ frappe.ui.form.on('Quality Action', {
 	},
 	procedure: function(frm) {
 		frm.set_value("date", frappe.datetime.get_today())
+	},
+	goal: function(frm){
+		frm.set_query("objective", {
+			"filters": {
+				"parenttype": "Quality Goal",
+				"parentfield": "objective",
+				"parent": frm.doc.goal
+			}
+		});
 	}
 });
