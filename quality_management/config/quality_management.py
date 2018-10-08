@@ -4,29 +4,24 @@ from frappe import _
 def get_data():
     return [
         {
-            "label": "QMS1",
+            "label": "DUMMY 1",
             "items": [
                 {
                     "type": "doctype",
                     "name": "Quality Goal"
-                }
-            ]
-        },
-        {
-            "label": "QMS2",
-            "items": [
-                {
-                    "type": "doctype",
-                    "name": "Quality Review"
                 },
                 {
                     "type": "doctype",
                     "name": "Quality Procedure"
-                },
+                }
+            ]
+        },
+        {
+            "label": "DUMMY 2",
+            "items": [
                 {
                     "type": "doctype",
-                    "name": "Customer Feedback"
-
+                    "name": "Quality Review"
                 },
                 {
                     "type": "doctype",
@@ -35,16 +30,31 @@ def get_data():
                 },
                 {
                     "type": "doctype",
+                    "name": "Quality Monitoring Frequency"
+
+                }
+            ]
+        },
+        {
+            "label": "DUMMY 3",
+            "items": [
+                {
+                    "type": "doctype",
                     "name": "Quality Audit"
                 },
                 {
                     "type": "doctype",
                     "name": "Quality Audit Type"
 
-                },
+                }
+            ]
+        },
+        {
+            "label": "DUMMY 4",
+            "items": [
                 {
                     "type": "doctype",
-                    "name": "Quality Monitoring Frequency"
+                    "name": "Customer Feedback"
 
                 }
             ]
