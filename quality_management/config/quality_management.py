@@ -36,11 +36,11 @@ def get_data():
                 {
                     "type": "doctype",
                     "name": "Quality Audit"
-{
+                },
+                {
                     "type": "doctype",
                     "name": "Quality Audit Type"
 
-                }
                 },
                 {
                     "type": "doctype",
