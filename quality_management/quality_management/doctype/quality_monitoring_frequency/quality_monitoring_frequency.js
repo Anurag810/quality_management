@@ -2,8 +2,8 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Quality Monitoring Frequency', {
-	refresh: function(frm) {
-
+	onload: function(frm) {
+		frm.set_df_property("day", "options", "Everyday");
 	},
 	frequency: function(frm){
 		var frequency = frm.get_field("frequency").value;
