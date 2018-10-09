@@ -13,10 +13,6 @@ def get_data():
                 {
                     "type": "doctype",
                     "name": "Quality Procedure"
-                },
-                {
-                    "type": "doctype",
-                    "name": "Measurement Unit"
                 }
             ]
         },
