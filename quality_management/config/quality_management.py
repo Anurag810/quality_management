@@ -4,7 +4,7 @@ from frappe import _
 def get_data():
     return [
         {
-            "label": "DUMMY 1",
+            "label": "Quality Goal and Procedure",
             "items": [
                 {
                     "type": "doctype",
@@ -17,7 +17,7 @@ def get_data():
             ]
         },
         {
-            "label": "DUMMY 2",
+            "label": "Quality Review and Action",
             "items": [
                 {
                     "type": "doctype",
@@ -36,7 +36,7 @@ def get_data():
             ]
         },
         {
-            "label": "DUMMY 3",
+            "label": "Audit",
             "items": [
                 {
                     "type": "doctype",
@@ -50,7 +50,7 @@ def get_data():
             ]
         },
         {
-            "label": "DUMMY 4",
+            "label": "Feedback",
             "items": [
                 {
                     "type": "doctype",
