@@ -36,7 +36,7 @@ def get_data():
             ]
         },
         {
-            "label": "Audit",
+            "label": "Quality Audit",
             "items": [
                 {
                     "type": "doctype",
@@ -50,7 +50,7 @@ def get_data():
             ]
         },
         {
-            "label": "Feedback",
+            "label": "Quality Feedback",
             "items": [
                 {
                     "type": "doctype",
