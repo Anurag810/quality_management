@@ -14,15 +14,17 @@ frappe.ui.form.on('Quality Review', {
 				name: frm.doc.goal
             },
             callback: function (data) {
-				console.log(data.message.objective[0].objective);
-				//var string = "";
-				//for (var i = 0; i < data.message.objective.length; i++ ){
-				//	string = string + data.message.objective[i].objective;
-				//	if (i != data.message.objective.length-1 ){
-				//		string = string + "\n";	
-				//	}
-				//}
-				frm.set_df_property("objective", data.message.objective[0].objective);
+				//console.log(data.message.objective[0]);
+				for (var i = 0; i < data.message.objective.length; i++ ){
+					//if(i != 0){
+						frm.add_child("values");
+					//}
+					frm.fields_dict.values.get_value()[i].objective = data.message.objective[i].objective;
+					frm.fields_dict.values.get_value()[i].target = data.message.objective[i].target;
+					frm.fields_dict.values.get_value()[i].target_unit = data.message.objective[i].unit;
+					frm.fields_dict.values.get_value()[i].achieved_unit = data.message.objective[i].unit;
+				}
+				frm.refresh();
             }
         })
 	},
