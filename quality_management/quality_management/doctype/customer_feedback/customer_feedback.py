@@ -7,4 +7,15 @@ import frappe
 from frappe.model.document import Document
 
 class CustomerFeedback(Document):
-	pass
+	
+	def before_save(self):
+		doc = frappe.get_doc({
+			'doctype': 'Quality Action',
+			'action': 'Corrective',
+			'type': 'Customer Feedback',
+			'feedback': ''+ self.name +'',
+			'date': ''+ frappe.utils.nowdate() +'',
+			'problem': ''+ self.description +''
+		})
+		doc.insert()
+		doc.name
