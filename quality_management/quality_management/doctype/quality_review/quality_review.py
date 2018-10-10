@@ -9,12 +9,33 @@ from frappe.model.document import Document
 class QualityReview(Document):
 	
 	def before_save(self):
-	#	print(self.values[0].objective)
-	#	print(self.values[0].achieved)
-	#	print(self.values[0].target)
-	#	print(len(self.values))
-		for value in self.values:
-			if value.achieved < value.target:
-				print(value.objective)
-				print(value.achieved)
-				print(value.target)
+		problem = ''
+		print("""SELECT * FROM `tabQuality Review` WHERE review='"""+self.name+"""'""")
+		query = frappe.db.sql("""SELECT * FROM `tabQuality Action` WHERE review='"""+self.name+"""'""", as_dict=1)
+		print(len(query))
+		if len(query) == 0:
+			for value in self.values:
+				if value.achieved < value.target:
+					problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
+			
+			if(problem != ''):		
+				doc = frappe.get_doc({
+					'doctype': 'Quality Action',
+					'action': 'Corrective',
+					'type': 'Quality Review',
+					'review': ''+ self.name +'',
+					'date': ''+ frappe.utils.nowdate() +'',
+					'problem': ''+ problem +''
+				})
+				doc.insert()
+				doc.name
+		else:
+			for value in self.values:
+				if value.achieved < value.target:
+					problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
+			
+			if problem != '':
+				print(""""UPDATE `tabQuality Action` SET review='"""+ problem +"""' WHERE review='"""+self.name+"""'""")
+				query = frappe.db.sql("""UPDATE `tabQuality Action` SET problem='"""+ problem +"""' WHERE review='"""+self.name+"""'""")
+			else:
+				query = frappe.db.sql("""DELETE FROM `tabQuality Action` WHERE review='"""+self.name+"""'""")
