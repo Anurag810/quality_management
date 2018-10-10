@@ -29,13 +29,15 @@ class QualityReview(Document):
 				})
 				doc.insert()
 				doc.name
-		else:
-			for value in self.values:
-				if value.achieved < value.target:
-					problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
+	def on_update(self):
+		problem = ''		
+		for value in self.values:
+			if value.achieved < value.target:
+				problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
 			
-			if problem != '':
-				print(""""UPDATE `tabQuality Action` SET review='"""+ problem +"""' WHERE review='"""+self.name+"""'""")
-				query = frappe.db.sql("""UPDATE `tabQuality Action` SET problem='"""+ problem +"""' WHERE review='"""+self.name+"""'""")
-			else:
-				query = frappe.db.sql("""DELETE FROM `tabQuality Action` WHERE review='"""+self.name+"""'""")
+		if problem != '':
+			print(""""UPDATE `tabQuality Action` SET review='"""+ problem +"""' WHERE review='"""+self.name+"""'""")
+			query = frappe.db.sql("""UPDATE `tabQuality Action` SET problem='"""+ problem +"""' WHERE review='"""+self.name+"""'""")
+		else:
+			query = frappe.db.sql("""DELETE FROM `tabQuality Action` WHERE review='"""+self.name+"""'""")
+
