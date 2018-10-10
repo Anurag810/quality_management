@@ -8,23 +8,37 @@ frappe.ui.form.on('Quality Action', {
 	onload: function(frm) {
 		frm.set_value("date", frappe.datetime.get_today())
 	},
-	goal: function(frm){
+	review: function(frm){
 		frappe.call({
             "method": "frappe.client.get",
             args: {
-                doctype: "Quality Goal",
-				name: frm.doc.goal
+                doctype: "Quality Review",
+				name: frm.doc.review
             },
             callback: function (data) {
-				var string = "";
-				for (var i = 0; i < data.message.objective.length; i++ ){
-					string = string + data.message.objective[i].objective;
-					if (i != data.message.objective.length-1 ){
-						string = string + "\n";	
+				var review = "";
+				for (var i = 0; i < data.message.values.length; i++ ){
+					if (data.message.values[i].achieved < data.message.values[i].target){
+						review = review + "For " + data.message.values[i].objective + ", Achieved Value : " + data.message.values[i].achieved + " is Less than Target Value " + data.message.values[i].target + "\n"; 
 					}
 				}
-				frm.set_df_property("objective", "options", string)
+				frm.set_value("problem", review);
             }
         })
+	},
+	audit: function(frm){
+
+	},
+	feedback: function(frm) {
+		frappe.call({
+			"method": "frappe.client.get",
+			args: {
+				doctype: "Customer Feedback",
+				name: frm.doc.feedback
+			},
+			callback: function(data){
+				frm.set_value("problem", data.message.description)
+			}
+		})
 	}
 });
