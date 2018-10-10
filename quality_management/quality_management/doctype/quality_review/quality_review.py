@@ -29,7 +29,27 @@ class QualityReview(Document):
 				})
 				doc.insert()
 				doc.name
-		else:
+	def on_update(self):
+		problem = ''
+		query = frappe.db.sql("""SELECT * FROM `tabQuality Action` WHERE review='"""+self.name+"""'""", as_dict=1)
+		print(len(query))
+		if len(query) == 0:
+			for value in self.values:
+				if value.achieved < value.target:
+					problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
+			
+			if(problem != ''):		
+				doc = frappe.get_doc({
+					'doctype': 'Quality Action',
+					'action': 'Corrective',
+					'type': 'Quality Review',
+					'review': ''+ self.name +'',
+					'date': ''+ frappe.utils.nowdate() +'',
+					'problem': ''+ problem +''
+				})
+				doc.insert()
+				doc.name
+		if len(query) != 0:			
 			for value in self.values:
 				if value.achieved < value.target:
 					problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
@@ -39,3 +59,4 @@ class QualityReview(Document):
 				query = frappe.db.sql("""UPDATE `tabQuality Action` SET problem='"""+ problem +"""' WHERE review='"""+self.name+"""'""")
 			else:
 				query = frappe.db.sql("""DELETE FROM `tabQuality Action` WHERE review='"""+self.name+"""'""")
+
