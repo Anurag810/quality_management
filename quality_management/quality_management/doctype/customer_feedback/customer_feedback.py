@@ -8,7 +8,8 @@ from frappe.model.document import Document
 
 class CustomerFeedback(Document):
 	
-	def before_save(self):
+	def after_insert(self):
+		print(self.name)
 		doc = frappe.get_doc({
 			'doctype': 'Quality Action',
 			'action': 'Corrective',

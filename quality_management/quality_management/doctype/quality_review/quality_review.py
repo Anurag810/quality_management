@@ -8,7 +8,7 @@ from frappe.model.document import Document
 
 class QualityReview(Document):
 	
-	def before_save(self):
+	def after_insert(self):
 		problem = ''
 		print("""SELECT * FROM `tabQuality Review` WHERE review='"""+self.name+"""'""")
 		query = frappe.db.sql("""SELECT * FROM `tabQuality Action` WHERE review='"""+self.name+"""'""", as_dict=1)
