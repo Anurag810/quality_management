@@ -31,3 +31,7 @@ class QualityAudit(Document):
 					query = frappe.db.sql("""DELETE FROM `tabQuality Action` WHERE audit='"""+self.name+"""'""")
 		else:
 			pass
+
+	def validate(self):
+		if self.to_date < self.from_date:
+			frappe.throw("look at the dates")
