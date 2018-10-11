@@ -13,7 +13,6 @@ class QualityAudit(Document):
 			query = frappe.db.sql("""SELECT * FROM `tabQuality Action` WHERE audit='"""+self.name+"""'""", as_dict=1)
 
 			if len(query) == 0:
-				print("Original")
 				if self.status == "Non Conformance":		
 					doc = frappe.get_doc({
 						'doctype': 'Quality Action',
@@ -26,7 +25,6 @@ class QualityAudit(Document):
 					doc.insert()
 					doc.name
 			else:
-				print("Duplicate")
 				if self.status == "Non Conformance":
 					query = frappe.db.sql("""UPDATE `tabQuality Action` SET problem='Non-Conformance in Audit """+ self.name +"""' WHERE audit='"""+self.name+"""'""")
 				else:
