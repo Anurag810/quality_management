@@ -34,4 +34,4 @@ class QualityAudit(Document):
 
 	def validate(self):
 		if self.to_date < self.from_date:
-			frappe.throw("look at the dates")
+			frappe.throw("From Date can't be grater than To Date")
