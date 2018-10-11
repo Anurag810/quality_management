@@ -8,16 +8,17 @@ from frappe.model.document import Document
 
 class QualityReview(Document):
 	
-	def after_insert(self):
+	def on_update(self):
 		problem = ''
-		print("""SELECT * FROM `tabQuality Review` WHERE review='"""+self.name+"""'""")
 		query = frappe.db.sql("""SELECT * FROM `tabQuality Action` WHERE review='"""+self.name+"""'""", as_dict=1)
-		print(len(query))
+
 		if len(query) == 0:
+			print("Original")
 			for value in self.values:
-				if value.achieved < value.target:
+				if int(value.achieved) < int(value.target):
 					problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
 			
+			print(problem)
 			if(problem != ''):		
 				doc = frappe.get_doc({
 					'doctype': 'Quality Action',
@@ -30,10 +31,12 @@ class QualityReview(Document):
 				doc.insert()
 				doc.name
 		else:
+			print("Duplicate")
 			for value in self.values:
-				if value.achieved < value.target:
+				if int(value.achieved) < int(value.target):
 					problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
 			
+			print(problem)
 			if problem != '':
 				print(""""UPDATE `tabQuality Action` SET review='"""+ problem +"""' WHERE review='"""+self.name+"""'""")
 				query = frappe.db.sql("""UPDATE `tabQuality Action` SET problem='"""+ problem +"""' WHERE review='"""+self.name+"""'""")
