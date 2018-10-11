@@ -1,6 +1,14 @@
 from __future__ import unicode_literals
 import frappe
-from frappe.utils import datediff, nowdate, format_date, add_days
+from frappe.utils import date_diff, nowdate, formatdate, add_days
 
-def all()
- frappe.throw("")
+def all():
+	doc = frappe.get_doc({
+		'doctype': 'Quality Action',
+		'action': 'Corrective',
+		'type': 'Quality Review',
+		'date': ''+ frappe.utils.nowdate() +'',
+		'problem': 'hello'
+	})
+	doc.insert()
+	doc.name
