@@ -9,32 +9,27 @@ from frappe.model.document import Document
 class QualityAudit(Document):
 
 	def on_update(self):
-		problem = ''
-		query = frappe.db.sql("""SELECT * FROM `tabQuality Audit` WHERE review='"""+self.name+"""'""", as_dict=1)
+		if frappe.utils.nowdate() == self.to_date:
+			query = frappe.db.sql("""SELECT * FROM `tabQuality Action` WHERE audit='"""+self.name+"""'""", as_dict=1)
 
-		if len(query) == 0:
-			for value in self.values:
-				if int(value.achieved) < int(value.target):
-					problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
-			
-			if(problem != ''):		
-				doc = frappe.get_doc({
-					'doctype': 'Quality Action',
-					'action': 'Corrective',
-					'type': 'Quality Review',
-					'review': ''+ self.name +'',
-					'date': ''+ frappe.utils.nowdate() +'',
-					'problem': ''+ problem +''
-				})
-				doc.insert()
-				doc.name
-		else:
-			for value in self.values:
-				if int(value.achieved) < int(value.target):
-					problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
-			
-			if problem != '':
-				query = frappe.db.sql("""UPDATE `tabQuality Audit` SET problem='"""+ problem +"""' WHERE review='"""+self.name+"""'""")
+			if len(query) == 0:
+				print("Original")
+				if self.status == "Non Conformance":		
+					doc = frappe.get_doc({
+						'doctype': 'Quality Action',
+						'action': 'Corrective',
+						'type': 'Quality Audit',
+						'audit': ''+ self.name +'',
+						'date': ''+ frappe.utils.nowdate() +'',
+						'problem': 'Non-Conformance in Audit '+ self.name +''
+					})
+					doc.insert()
+					doc.name
 			else:
-				query = frappe.db.sql("""DELETE FROM `tabQuality Audit` WHERE review='"""+self.name+"""'""")
-
+				print("Duplicate")
+				if self.status == "Non Conformance":
+					query = frappe.db.sql("""UPDATE `tabQuality Action` SET problem='Non-Conformance in Audit """+ self.name +"""' WHERE audit='"""+self.name+"""'""")
+				else:
+					query = frappe.db.sql("""DELETE FROM `tabQuality Action` WHERE audit='"""+self.name+"""'""")
+		else:
+			pass
