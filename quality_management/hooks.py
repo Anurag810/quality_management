@@ -91,9 +91,11 @@ app_license = "MIT"
 # ---------------
 
 scheduler_events = {
- 	"monthly": [
- 		"quality_management.tasks.create_audit"
- 	]
+ 	"cron": {
+ 		"0/1 * * * *": [
+            "quality_management.quality_management.tasks.create_audit"
+        ],
+	}
 }
 
 # Testing

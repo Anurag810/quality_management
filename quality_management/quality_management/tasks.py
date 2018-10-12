@@ -8,7 +8,6 @@ def create_audit():
 		'from_date': ''+ frappe.utils.nowdate() +'',
         'status':'Scheduled',
         'action':'Under Review'
-
 	})
 	doc.insert()
 	doc.name
