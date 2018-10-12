@@ -91,11 +91,19 @@ app_license = "MIT"
 # ---------------
 
 #scheduler_events = {
+<<<<<<< HEAD
  	#"cron": {
  	#	"0/1 * * * *": [
     #        "quality_management.quality_management.tasks.create_audit"
     #    ],
 	#}
+=======
+# 	"cron": {
+# 		"0/1 * * * *": [
+#            "quality_management.quality_management.tasks.create_audit"
+#        ],
+#	}
+>>>>>>> ab113666cf0f142779ee3ee027551cc4652e54b1
 #}
 
 # Testing
