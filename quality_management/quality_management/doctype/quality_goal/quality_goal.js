@@ -8,5 +8,8 @@ frappe.ui.form.on('Quality Goal', {
 	revision: function(frm) {
 		frm.set_value("revised_on", frappe.datetime.get_today())
 	},
+	frequency: function(frm) {
+		frm.set_value("scheduler", frm.doc.frequency.split("-")[1])
+	}
 });
 

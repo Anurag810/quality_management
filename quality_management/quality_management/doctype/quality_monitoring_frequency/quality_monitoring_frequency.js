@@ -8,7 +8,7 @@ frappe.ui.form.on('Quality Monitoring Frequency', {
 	frequency: function(frm){
 		var frequency = frm.get_field("frequency").value;
 		if (frequency == "Daily"){
-			frm.set_df_property("day", "options", "Everyday");
+			frm.set_df_property("day", "options", "Daily");
 		}
 		else if (frequency == "Weekly"){
 			frm.set_df_property("day", "options", "Monday\nTuesday\nWednesday\nThursday\nFriday\nSaturday");
