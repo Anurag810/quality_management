@@ -17,14 +17,14 @@ frappe.ui.form.on('Quality Goal', {
 
 		}
 		else if(a.indexOf("Monthly") != -1){
-		/*	var date = new Date();
+		var date = new Date();
 			var day = date.getDate();
 			var month = date.getMonth();
 			var year = date.getFullYear()			
 			
 			var m_frequency = parseInt(frm.doc.frequency.split("-")[1]);
 
-			if(m_frequency > day){
+			if(m_frequency <= day){
 				month = month + 2;
 				alert(year+"-"+month+"-"+day)
 				frm.set_value("next_date", year+"-"+month+"-"+m_frequency);
@@ -33,7 +33,7 @@ frappe.ui.form.on('Quality Goal', {
 				month = month + 1;
 				alert(year+"-"+month+"-"+m_frequency)
 				frm.set_value("next_date", year+"-"+month+"-"+m_frequency)
-			}*/
+			}
 		}
 		else if(a.indexOf("Quarterly") != -1){
 			alert("Q")
