@@ -14,6 +14,7 @@ frappe.ui.form.on('Quality Goal', {
 			 frm.set_value("next_date", frappe.datetime.add_days(frappe.datetime.get_today(), 1));
 		}
 		else if(a.indexOf("Weekly") != -1){
+
 		}
 		else if(a.indexOf("Monthly") != -1){
 		/*	var date = new Date();
