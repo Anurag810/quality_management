@@ -13,5 +13,4 @@ def audit():
 	doc.name
 
 def review():
-    date = frappe.utils.nowdate()
-    query = frappe.db.sql("""SELECT * FROM `tabQuality Goal` WHERE next_date='"""+ date +"""'""", as_dict=1)
+    
