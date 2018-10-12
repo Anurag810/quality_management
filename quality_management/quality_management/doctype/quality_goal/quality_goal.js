@@ -10,7 +10,8 @@ frappe.ui.form.on('Quality Goal', {
 	},
 	frequency: function(frm){
 		var a = frm.doc.frequency;
-		if (a == "Daily-Everyday"){
+		var n = a.indexOf("Daily");
+		if (n != -1){
 			 frm.set_value("next_date", frappe.datetime.add_days(frappe.datetime.get_today(), 1));
 }
 	}
