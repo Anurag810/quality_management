@@ -90,11 +90,11 @@ app_license = "MIT"
 # Scheduled Tasks
 # ---------------
 
-#scheduler_events = {
-# 	"all": [
-# 		"quality_management.tasks.all"
-# 	]
-#}
+scheduler_events = {
+ 	"monthly": [
+ 		"quality_management.tasks.create_audit"
+ 	]
+}
 
 # Testing
 # -------
