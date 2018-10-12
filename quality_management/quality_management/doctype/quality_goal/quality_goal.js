@@ -17,7 +17,9 @@ frappe.ui.form.on('Quality Goal', {
 			alert("Weekly");
 		}
 		else if(a.indexOf("Monthly") != -1){
-			alert("Monthly");
+			var d=Date.now();
+			var y=getDate();
+			console.log(y);
 		}
 		else if(a.indexOf("Quarterly") != -1){
 			alert("Q")
