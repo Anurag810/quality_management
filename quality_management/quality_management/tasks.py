@@ -20,7 +20,7 @@ def review():
 	for data in frappe.get_all("Quality Goal",fields=['name','scheduler','scope']):
 		print(data.scheduler)
 		if data.scheduler == "Everyday":
-			print("-----------------------------------------------------------------------------------Everyday")
+			print("---------------------------------------------------------------------------Daily-Everyday")
 		if data.scheduler == day_name:
 			print("---------------------------------------------------------------------------weekly-"+day_name)
 		if data.scheduler == str(date):
