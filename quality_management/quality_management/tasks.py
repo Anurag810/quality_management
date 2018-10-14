@@ -14,14 +14,4 @@ def audit():
 	doc.name
 
 def review():
-	now = datetime.datetime.now()
-	date = now.day
-	day_name = now.strftime("%A")
-	for data in frappe.get_all("Quality Goal",fields=['name','scheduler','scope']):
-		print(data.scheduler)
-		if data.scheduler == "Everyday":
-			print("---------------------------------------------------------------------------Daily-Everyday")
-		if data.scheduler == day_name:
-			print("---------------------------------------------------------------------------weekly-"+day_name)
-		if data.scheduler == str(date):
-			print("---------------------------------------------------------------------------Monthly-" + str(date))
+	pass
