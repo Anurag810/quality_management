@@ -19,3 +19,9 @@ def review():
 	objectives = [[d.objective for d in goal.objective] for goal in goals]
 	targets = [[d.target for d in goal.objective] for goal in goals]
 	units = [[d.unit for d in goal.objective] for goal in goals]
+
+#	doc = frappe.get_doc({
+#		'doctype': 'Quality Review',
+#	})
+#	doc.insert()
+#	doc.name
