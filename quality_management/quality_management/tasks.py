@@ -14,4 +14,8 @@ def audit():
 	doc.name
 
 def review():
-	pass
+	data = frappe.get_doc('Quality Goal')
+	goals = [frappe.get_doc('Quality Goal', d.name) for d in data]
+	objectives = [[d.objective for d in goal.objective] for goal in goals]
+	targets = [[d.target for d in goal.objective] for goal in goals]
+	units = [[d.unit for d in goal.objective] for goal in goals]
