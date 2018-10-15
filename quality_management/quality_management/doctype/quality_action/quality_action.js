@@ -25,16 +25,13 @@ frappe.ui.form.on('Quality Action', {
 				name: frm.doc.review
             },
             callback: function (data) {
-				var review = "";
-				console.log(data.message)
 				for (var i = 0; i < data.message.values.length; i++ ){
 					if (data.message.values[i].achieved < data.message.values[i].target){
-						frm.add_child("description")
-						
-						//review = review + "For " + data.message.values[i].objective + ", Achieved Value : " + data.message.values[i].achieved + " is Less than Target Value " + data.message.values[i].target + "\n"; 
+						frm.add_child("description");
+						frm.fields_dict.description.get_value()[i].problem = ""+ data.message.values[i].objective +"-"+ data.message.values[i].achieved + " " + data.message.values[i].target_unit;
 					}
 				}
-			//	frm.set_value("problem", review);
+				frm.refresh();
             }
         })
 	},
@@ -53,5 +50,8 @@ frappe.ui.form.on('Quality Action', {
 				frm.refresh();
 			}
 		})
+	},
+	type: function(frm){
+		//code to delete table
 	}
 });
