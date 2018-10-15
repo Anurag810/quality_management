@@ -25,9 +25,6 @@ def review():
 			values = objective.objective
 			target = objective.target
 			unit = objective.unit
-		print(values)
-		print(target)
-		print(unit)
 		"""doc = frappe.get_doc({
 			"doctype": "Quality Review",
    			"goal": name,
@@ -41,25 +38,26 @@ def review():
    		})"""
 		return objectives
 
-	for data in frappe.get_all("Quality Goal",fields=['name','weekly','frequency','monthly']):
+	for data in frappe.get_all("Quality Goal",fields=['name','frequency','monthly','weekly']):
 		if data.frequency == 'Daily':
 			print("EVERYDAY----"+ data.name)
 			objectives = get_objective(data.name)
 			#print(objectives)
 
 		elif data.frequency == 'Weekly':
+			print("Week----"+ data.name)
 			if data.weekly == day_name:
-				print("WEEKLY----"+ data.name)
 				objectives = get_objective(data.name)
 			#	print(objectives)
 
 		elif data.frequency == 'Monthly':
-			if data.montly == str(day):
-				print("MONTHLY----"+ data.name)
+			print("Monthly----"+ data.name)
+			print(data.monthly,str(day))
+			if data.month == str(day):
 				objectives = get_objective(data.name)
 			#	print(objectives)
 
-		elif data.frequency == 'Quartely':
+		elif data.frequency == 'Quarterly':
 			if (month == 'January' or month == 'April' or month == 'July' or month == 'October') and day == 1:
 				print("QUARTERLY----"+ data.name)
 				objectives = get_objective(data.name)
