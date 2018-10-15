@@ -3,6 +3,6 @@
 
 frappe.ui.form.on('Quality Monitoring Frequency', {
 	onload: function(frm) {
-		frm.set_df_property("day", "options", "Everyday");
+
 	},
 });
