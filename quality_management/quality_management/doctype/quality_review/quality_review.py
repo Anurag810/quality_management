@@ -30,10 +30,10 @@ class QualityReview(Document):
 				doc.append("description",{
 					'problem': data
 				})
-		print(doc.review)
-		print(doc.type)
-		print(doc.action)
-		print("\n".join(doc.description))		
+		#print(doc.review)
+		#print(doc.type)
+		#print(doc.action)
+		#print("\n".join(doc.description))		
 		#	doc.save()
 		#	doc.insert()
 		#	frappe.db.commit()
