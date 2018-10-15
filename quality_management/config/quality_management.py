@@ -50,6 +50,16 @@ def get_data():
             ]
         },
         {
+            "label": "Meeting",
+            "items": [
+                {
+                    "type": "doctype",
+                    "name": "Quality Meeting"
+
+                }
+            ]
+        },
+        {
             "label": "Feedback",
             "items": [
                 {
@@ -63,5 +73,5 @@ def get_data():
 
                 }
             ]
-        }
+        },
     ]
