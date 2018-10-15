@@ -17,7 +17,7 @@ def review():
 	now = datetime.datetime.now()
     date = now.day
     day_name = now.strftime("%A")
-    for data in frappe.get_all("Quality Goal",fields=['name','scheduler','scope']):
+    for data in frappe.get_all("Quality Goal",fields=['name','scheduler','scope','']):
         print(data.scheduler)
         if data.scheduler == "Everyday":
             print("---------------------------------------------------------------------------Daily-Everyday")
