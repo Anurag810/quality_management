@@ -10,16 +10,43 @@ class QualityReview(Document):
 
 	def after_insert(self):
 		print("After Insert")
+		print(self.name)
 		problem = ''
-		query = frappe.get_list("Quality Action", filters={"review":""+ self.name +""})
-		if len(query) == 0:
-			for value in self.values:
-				if int(value.achieved) < int(value.target):
-					problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
+		for value in self.values:
+			if int(value.achieved) < int(value.target):
+				problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
 
-			if(problem != ''):
-				problem = filter(None, problem.split("\n"))
-				print(problem)
+		if(problem != ''):
+			problem = filter(None, problem.split("\n"))
+			print(problem)
+			doc = frappe.get_doc({
+				'doctype': 'Quality Action',
+				'action': 'Corrective',
+				'type': 'Quality Review',
+				'review': ''+ self.name +'',
+				'date': ''+ frappe.utils.nowdate() +''
+			})
+			for data in problem:
+				doc.append("description",{
+					'problem': data
+				})
+		print(doc.review)
+		print(doc.type)
+		print(doc.action)
+		print("\n".join(doc.description))		
+		#	doc.save()
+		#	doc.insert()
+		#	frappe.db.commit()
+		
+		#query = frappe.get_list("Quality Action", filters={"review":""+ self.name +""})
+		#if len(query) == 0:
+		#	for value in self.values:
+		#		if int(value.achieved) < int(value.target):
+		#			problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
+
+		#	if(problem != ''):
+		#		problem = filter(None, problem.split("\n"))
+		#		print(problem)
 				#doc = frappe.get_doc({
 				#	'doctype': 'Quality Action',
 				#	'action': 'Corrective',
@@ -34,8 +61,8 @@ class QualityReview(Document):
 				#doc.save()
 				#doc.insert()
 				#frappe.db.commit()
-		else:
-			pass
+		#else:
+		#	pass
 
 	def on_update(self):
 		print("On Update")
