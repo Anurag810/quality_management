@@ -21,40 +21,58 @@ def review():
 
 	def get_objective(name):
 		objectives = frappe.get_all("Quality Objective", filters={'parent': ''+ name +''}, fields=['objective', 'target', 'unit'])
+		for objective in objectives:
+			values = objective.objective
+			target = objective.target
+			unit = objective.unit
+		print(values)
+		print(target)
+		print(unit)
+		"""doc = frappe.get_doc({
+			"doctype": "Quality Review",
+   			"goal": name,
+   			"date": frappe.utils.nowdate(),
+   			"values":	[{
+    			"objective": kwargs.get, 
+    			"target":,
+    			"target_unit":,
+				"achieved_unit"
+    		}]
+   		})"""
 		return objectives
 
 	for data in frappe.get_all("Quality Goal",fields=['name','scheduler','frequency']):
 		if data.frequency.find("Everyday") > -1:
 			print("EVERYDAY----"+ data.name)
 			objectives = get_objective(data.name)
-			print(objectives)
+			#print(objectives)
 
 		elif data.frequency.find("Weekly") > -1:
 			if data.scheduler == day_name:
 				print("WEEKLY----"+ data.name)
 				objectives = get_objective(data.name)
-				print(objectives)
+			#	print(objectives)
 
 		elif data.frequency.find("Monthly") > -1:
 			if data.scheduler == str(day):
 				print("MONTHLY----"+ data.name)
 				objectives = get_objective(data.name)
-				print(objectives)
+			#	print(objectives)
 
 		elif data.frequency.find("Quarterly") > -1:
 			if (month == 'January' or month == 'April' or month == 'July' or month == 'October') and day == 1:
 				print("QUARTERLY----"+ data.name)
 				objectives = get_objective(data.name)
-				print(objectives)
+			#	print(objectives)
 
 		elif data.frequency.find("Half") > -1:
 			if (month == 'January' or month == 'July') and day == 1:
 				print("HALF----"+ data.name)
 				objectives = get_objective(data.name)
-				print(objectives)
+			#	print(objectives)
 
 		elif data.frequency.find("Yearly") > -1:
 			if month == 'January' and day == 1:
 				print("YEARLY----"+ data.name)
 				objectives = get_objective(data.name)
-				print(objectives)
+			#	print(objectives)
