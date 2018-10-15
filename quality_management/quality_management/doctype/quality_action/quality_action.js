@@ -31,14 +31,12 @@ frappe.ui.form.on('Quality Action', {
 						review = review + "For " + data.message.values[i].objective + ", Achieved Value : " + data.message.values[i].achieved + " is Less than Target Value " + data.message.values[i].target + "\n"; 
 					}
 				}
-				frm.set_value("problem", review);
+			//	frm.set_value("problem", review);
             }
         })
 	},
-	audit: function(frm){
-
-	},
 	feedback: function(frm) {
+		var problem = "";
 		frappe.call({
 			"method": "frappe.client.get",
 			args: {
@@ -46,7 +44,12 @@ frappe.ui.form.on('Quality Action', {
 				name: frm.doc.feedback
 			},
 			callback: function(data){
-				frm.set_value("problem", data.message.description)
+				console.log(data.message.feedback);
+				for (var i = 0; i < data.message.feedback.length; i++ ){
+					frm.add_child("description");
+					frm.fields_dict.description.get_value()[i].problem = ""+ data.message.feedback[i].parameter +"-"+ data.message.feedback[i].qualitative_feedback;
+				}
+				frm.refresh();
 			}
 		})
 	}
