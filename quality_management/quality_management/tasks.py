@@ -15,12 +15,8 @@ def audit():
 
 def review():
 	now = datetime.datetime.now()
-<<<<<<< HEAD
 	day = now.day
 	day_name = now.strftime("%A")
-	print (now)
-	print (day)
-	print (day_name)
 	for data in frappe.get_all("Quality Goal",fields=['name','scheduler','frequency']):
 		if data.frequency.find("Everyday") > -1:
 			pass
@@ -34,18 +30,6 @@ def review():
 			pass
 		if data.frequency.find("Yearly") > -1:
 			pass
-=======
-    date = now.day
-    day_name = now.strftime("%A")
-    for data in frappe.get_all("Quality Goal",fields=['name','scheduler','scope','']):
-        print(data.scheduler)
-        if data.scheduler == "Everyday":
-            print("---------------------------------------------------------------------------Daily-Everyday")
-        if data.scheduler == day_name:
-            print("---------------------------------------------------------------------------weekly-"+day_name)
-        if data.scheduler == str(date):
-            print("---------------------------------------------------------------------------Monthly-" + str(date))
->>>>>>> 7c9ca10823284eb76e53f65d567c972193e05a16
 
 #	data = frappe.get_doc('Quality Goal')
 #	goals = [frappe.get_doc('Quality Goal', d.name) for d in data]
