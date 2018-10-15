@@ -26,9 +26,12 @@ frappe.ui.form.on('Quality Action', {
             },
             callback: function (data) {
 				var review = "";
+				console.log(data.message)
 				for (var i = 0; i < data.message.values.length; i++ ){
 					if (data.message.values[i].achieved < data.message.values[i].target){
-						review = review + "For " + data.message.values[i].objective + ", Achieved Value : " + data.message.values[i].achieved + " is Less than Target Value " + data.message.values[i].target + "\n"; 
+						frm.add_child("description")
+						
+						//review = review + "For " + data.message.values[i].objective + ", Achieved Value : " + data.message.values[i].achieved + " is Less than Target Value " + data.message.values[i].target + "\n"; 
 					}
 				}
 			//	frm.set_value("problem", review);
@@ -36,7 +39,6 @@ frappe.ui.form.on('Quality Action', {
         })
 	},
 	feedback: function(frm) {
-		var problem = "";
 		frappe.call({
 			"method": "frappe.client.get",
 			args: {
@@ -44,7 +46,6 @@ frappe.ui.form.on('Quality Action', {
 				name: frm.doc.feedback
 			},
 			callback: function(data){
-				console.log(data.message.feedback);
 				for (var i = 0; i < data.message.feedback.length; i++ ){
 					frm.add_child("description");
 					frm.fields_dict.description.get_value()[i].problem = ""+ data.message.feedback[i].parameter +"-"+ data.message.feedback[i].qualitative_feedback;
