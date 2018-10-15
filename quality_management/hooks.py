@@ -91,11 +91,12 @@ app_license = "MIT"
 # ---------------
 
 scheduler_events = {
-"cron": {
- 		"0/1 * * * *": [
-            "quality_management.quality_management.tasks.review"
-        ],
-	}
+"daily": [
+    "quality_management.quality_management.tasks.review"
+],
+"montly": [
+    "quality_management.quality_management.tasks.audit"
+]
 }
 
 # Testing
