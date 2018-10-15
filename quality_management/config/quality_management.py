@@ -56,6 +56,11 @@ def get_data():
                     "type": "doctype",
                     "name": "Customer Feedback"
 
+                },
+                {
+                    "type": "doctype",
+                    "name": "Feedback Template"
+
                 }
             ]
         }
