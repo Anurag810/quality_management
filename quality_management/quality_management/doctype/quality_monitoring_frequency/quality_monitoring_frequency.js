@@ -17,13 +17,13 @@ frappe.ui.form.on('Quality Monitoring Frequency', {
 			frm.set_df_property("day", "options", "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28");
 		}
 		else if (frequency == "Quarterly"){
-			frm.set_df_property("day", "options", "January 1-April 1-July 1-October 1");
+			frm.set_df_property("day", "options", "1-January-April-July-October");
 		}
 		else if (frequency == "Half Yearly"){
-			frm.set_df_property("day", "options", "January 1-July 1");
+			frm.set_df_property("day", "options", "1-January-July");
 		}
 		else{
-			frm.set_df_property("day", "options", "January 1");
+			frm.set_df_property("day", "options", "1-January");
 		}
 	}
 });

@@ -18,19 +18,19 @@ def review():
 	day = now.day
 	day_name = now.strftime("%A")
 	month=now.strftime("%B")
-	print(month)
-	print(day)
-	print(day_name)
 
 	for data in frappe.get_all("Quality Goal",fields=['name','scheduler','frequency']):
+		print("----"+data.name)
+		print("--------"+data.scheduler)
+		print("--------"+data.frequency)
 		if data.frequency.find("Everyday") > -1:
 			pass
 		elif data.frequency.find("Weekly") > -1:
 			if data.scheduler == day_name:
-				print("weekly-"+day_name)
+				pass
 		elif data.frequency.find("Monthly") > -1:
 			if data.scheduler == str(day):
-				print("Montly-"+str(day))
+				pass
 		elif data.frequency.find("Quarterly") > -1:
 			if month == 'January' and day == 1:
 				pass
