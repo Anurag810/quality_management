@@ -40,11 +40,11 @@ def get_data():
             "items": [
                 {
                     "type": "doctype",
-                    "name": "Quality Audit-delete"
+                    "name": "Quality Audit"
                 },
                 {
                     "type": "doctype",
-                    "name": "Quality Audit Type-delete"
+                    "name": "Quality Audit Type"
 
                 }
             ]
