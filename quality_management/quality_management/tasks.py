@@ -25,27 +25,27 @@ def review():
 	for data in frappe.get_all("Quality Goal",fields=['name','scheduler','frequency']):
 		if data.frequency.find("Everyday") > -1:
 			pass
-		if data.frequency.find("Weekly") > -1:
+		elif data.frequency.find("Weekly") > -1:
 			if data.scheduler == day_name:
 				print("weekly-"+day_name)
-		if data.frequency.find("Monthly") > -1:
+		elif data.frequency.find("Monthly") > -1:
 			if data.scheduler == str(day):
 				print("Montly-"+str(day))
-		if data.frequency.find("Quarterly") > -1:
+		elif data.frequency.find("Quarterly") > -1:
 			if month == 'January' and day == 1:
 				pass
-			else if month == 'April' and day == 1:
+			elif month == 'April' and day == 1:
 				pass
-			else if month == 'July' and day == 1:
+			elif month == 'July' and day == 1:
 				pass
-			else if month == 'October' and day == 1:
+			elif month == 'October' and day == 1:
 				pass
-		if data.frequency.find("Half") > -1:
+		elif data.frequency.find("Half") > -1:
 			if month == 'January' and day == 1:
 				pass
-			else if month == 'July' and day == 1:
+			elif month == 'July' and day == 1:
 				pass
-		if data.frequency.find("Yearly") > -1:
+		elif data.frequency.find("Yearly") > -1:
 			if month == 'January' and day == 1:
 				pass
 
