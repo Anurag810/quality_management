@@ -41,24 +41,20 @@ def review():
    		})"""
 		return objectives
 
-	for data in frappe.get_all("Quality Goal",fields=['name','scheduler','frequency']):
+	for data in frappe.get_all("Quality Goal",fields=['name','weekly','frequency','monthly']):
 		if data.frequency == 'Daily':
 			print("EVERYDAY----"+ data.name)
 			objectives = get_objective(data.name)
 			#print(objectives)
 
 		elif data.frequency == 'Weekly':
-			print("WEEKLY----"+ data.name)
-			print(data.weekly == day_name)
-			print(data.weekly)
-			print(day_name)
 			if data.weekly == day_name:
 				print("WEEKLY----"+ data.name)
 				objectives = get_objective(data.name)
 			#	print(objectives)
 
 		elif data.frequency == 'Monthly':
-			if data.monthly == str(day):
+			if data.montly == str(day):
 				print("MONTHLY----"+ data.name)
 				objectives = get_objective(data.name)
 			#	print(objectives)
