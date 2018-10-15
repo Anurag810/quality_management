@@ -30,7 +30,7 @@ def get_data():
                 },
                 {
                     "type": "doctype",
-                    "name": "Quality Monitoring Frequency Remove"
+                    "name": "Quality Monitoring Frequency"
 
                 }
             ]
@@ -40,11 +40,11 @@ def get_data():
             "items": [
                 {
                     "type": "doctype",
-                    "name": "Quality Audit Remove"
+                    "name": "Quality Audit"
                 },
                 {
                     "type": "doctype",
-                    "name": "Quality Audit Type Remove"
+                    "name": "Quality Audit Type"
 
                 }
             ]
