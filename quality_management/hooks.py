@@ -94,7 +94,7 @@ scheduler_events = {
 "daily": [
     "quality_management.quality_management.tasks.review"
 ],
-"montly": [
+"monthly": [
     "quality_management.quality_management.tasks.audit"
 ]
 }
