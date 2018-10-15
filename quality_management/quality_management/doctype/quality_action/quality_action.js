@@ -14,7 +14,7 @@ frappe.ui.form.on('Quality Action', {
 			frm.set_value("type", "Customer Feedback")
 		}
 		else{
-			frm.set_value("type", "Quality Audit")
+			frm.set_value("type", "Quality Review")
 		}
 	},
 	review: function(frm){
