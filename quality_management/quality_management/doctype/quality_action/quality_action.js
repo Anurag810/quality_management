@@ -55,7 +55,4 @@ frappe.ui.form.on('Quality Action', {
 			}
 		})
 	},
-	type: function(frm){
-		
-	}
 });
