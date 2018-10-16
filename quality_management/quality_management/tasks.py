@@ -26,14 +26,13 @@ def review():
    			"goal": name,
    			"date": frappe.utils.nowdate(),
 		})
-		#enter child table values
-		"""for objective in objectives:
+		for objective in objectives:
 			doc.append("values",{
 				'objective': objective.objective,
 				'target': objective.target,
 				'target_unit': objective.unit,
 				'achieved_unit': objective.unit
-			})"""
+			})
 		doc.insert()
 		frappe.db.commit()
 		return objectives
