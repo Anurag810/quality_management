@@ -10,9 +10,6 @@ frappe.ui.form.on('Customer Feedback', {
 			frm.set_value("date", frappe.datetime.get_today())
 		}
 	},
-	customer: function(frm){
-		
-	},
 	template: function(frm){
 		if(frm.doc.feedback != null){
 			frm.doc.feedback = [];
