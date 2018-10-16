@@ -18,7 +18,6 @@ class QualityReview(Document):
 
 		if(problem != ''):
 			problem = filter(None, problem.split("\n"))
-			print(problem)
 			doc = frappe.get_doc({
 				'doctype': 'Quality Action',
 				'action': 'Corrective',
@@ -30,13 +29,9 @@ class QualityReview(Document):
 				doc.append("description",{
 					'problem': data
 				})
-		#print(doc.review)
-		#print(doc.type)
-		#print(doc.action)
-		#print("\n".join(doc.description))		
-		#	doc.save()
-		#	doc.insert()
-		#	frappe.db.commit()
+		#doc.save()
+		doc.insert()
+		frappe.db.commit()
 		
 		#query = frappe.get_list("Quality Action", filters={"review":""+ self.name +""})
 		#if len(query) == 0:
@@ -68,8 +63,8 @@ class QualityReview(Document):
 		print("On Update")
 		problem = ''
 		print(self.name)
-		query = frappe.get_list("Quality Action", filters={"review":""+ self.name +""})
-		print()
+		query = frappe.get_doc("Quality Action", filters={"review":""+ self.name +""})
+		print(query)
 		if len(query) != 0:
 			print("In If")
 			for value in self.values:
