@@ -38,39 +38,26 @@ def review():
    		})"""
 		return objectives
 
-	for data in frappe.get_all("Quality Goal",fields=['name','frequency','monthly','weekly']):
+	for data in frappe.get_all("Quality Goal",fields=['name','frequency','date','weekly']):
 		if data.frequency == 'Daily':
-			print("EVERYDAY----"+ data.name)
 			objectives = get_objective(data.name)
-			#print(objectives)
 
 		elif data.frequency == 'Weekly':
-			print("Week----"+ data.name)
 			if data.weekly == day_name:
 				objectives = get_objective(data.name)
-			#	print(objectives)
 
 		elif data.frequency == 'Monthly':
-			print("Monthly----"+ data.name)
-			print(data.monthly,str(day))
-			if data.month == str(day):
+			if data.date == str(day):
 				objectives = get_objective(data.name)
-			#	print(objectives)
 
 		elif data.frequency == 'Quarterly':
-			if (month == 'January' or month == 'April' or month == 'July' or month == 'October') and day == 1:
-				print("QUARTERLY----"+ data.name)
+			if (month == 'January' or month == 'April' or month == 'July' or month == 'October') and str(day) == data.date:
 				objectives = get_objective(data.name)
-			#	print(objectives)
 
 		elif data.frequency == 'Half Yearly':
-			if (month == 'January' or month == 'July') and day == 1:
-				print("HALF----"+ data.name)
+			if (month == 'January' or month == 'July') and str(day) == data.date:
 				objectives = get_objective(data.name)
-			#	print(objectives)
 
 		elif data.frequency == 'Yearly':
-			if month == 'January' and day == 1:
-				print("YEARLY----"+ data.name)
+			if month == data.yearly and str(day) == data.date:
 				objectives = get_objective(data.name)
-			#	print(objectives)
