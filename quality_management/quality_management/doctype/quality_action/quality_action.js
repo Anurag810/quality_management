@@ -5,26 +5,54 @@ frappe.ui.form.on('Quality Action', {
 	refresh: function(frm) {
 
 	},
-	procedure: function(frm) {
+	onload: function(frm) {
 		frm.set_value("date", frappe.datetime.get_today())
+		if (frm.doc.review != null){
+			frm.set_value("type", "Quality Review")
+		}
+		else if(frm.doc.feedback != null){
+			frm.set_value("type", "Customer Feedback")
+		}
+		else{
+			frm.set_value("type", "Quality Review")
+		}
 	},
-	goal: function(frm){
+	review: function(frm){
+		frm.doc.description=[]
+		frm.refresh()
 		frappe.call({
             "method": "frappe.client.get",
             args: {
-                doctype: "Quality Goal",
-				name: frm.doc.goal
+                doctype: "Quality Review",
+				name: frm.doc.review
             },
             callback: function (data) {
-				var string = "";
-				for (var i = 0; i < data.message.objective.length; i++ ){
-					string = string + data.message.objective[i].objective;
-					if (i != data.message.objective.length-1 ){
-						string = string + "\n";	
+				for (var i = 0; i < data.message.values.length; i++ ){
+					if (data.message.values[i].achieved < data.message.values[i].target){
+						frm.add_child("description");
+						frm.fields_dict.description.get_value()[i].problem = ""+ data.message.values[i].objective +"-"+ data.message.values[i].achieved + " " + data.message.values[i].target_unit;
 					}
 				}
-				frm.set_df_property("objective", "options", string)
+				frm.refresh();
             }
         })
-	}
+	},
+	feedback: function(frm) {
+		frm.doc.description=[]
+		frm.refresh()
+		frappe.call({
+			"method": "frappe.client.get",
+			args: {
+				doctype: "Customer Feedback",
+				name: frm.doc.feedback
+			},
+			callback: function(data){
+				for (var i = 0; i < data.message.feedback.length; i++ ){
+					frm.add_child("description");
+					frm.fields_dict.description.get_value()[i].problem = ""+ data.message.feedback[i].parameter +"-"+ data.message.feedback[i].qualitative_feedback;
+				}
+				frm.refresh();
+			}
+		})
+	},
 });

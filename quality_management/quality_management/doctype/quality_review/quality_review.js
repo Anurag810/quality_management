@@ -5,8 +5,10 @@ frappe.ui.form.on('Quality Review', {
 	refresh: function(frm) {
 
 	},
-	procedure: function(frm) {
+	onload: function(frm){
 		frm.set_value("date", frappe.datetime.get_today())
+	},
+	goal: function(frm) {
 		frappe.call({
             "method": "frappe.client.get",
             args: {
@@ -14,31 +16,15 @@ frappe.ui.form.on('Quality Review', {
 				name: frm.doc.goal
             },
             callback: function (data) {
-				var string = "";
 				for (var i = 0; i < data.message.objective.length; i++ ){
-					string = string + data.message.objective[i].objective;
-					if (i != data.message.objective.length-1 ){
-						string = string + "\n";	
-					}
+					frm.add_child("values");
+					frm.fields_dict.values.get_value()[i].objective = data.message.objective[i].objective;
+					frm.fields_dict.values.get_value()[i].target = data.message.objective[i].target;
+					frm.fields_dict.values.get_value()[i].target_unit = data.message.objective[i].unit;
+					frm.fields_dict.values.get_value()[i].achieved_unit = data.message.objective[i].unit;
 				}
-				frm.set_df_property("objective", "options", string)
+				frm.refresh();
             }
         })
 	},
-	objective: function(frm) { 
-		frappe.call({
-            "method": "frappe.client.get",
-            args: {
-                doctype: "Quality Goal",
-				name: frm.doc.goal
-            },
-            callback: function (data) {
-				for (var i = 0; i < data.message.objective.length; i++ ){
-					if (data.message.objective[i].objective == frm.doc.objective){
-						frm.set_value("target", data.message.objective[i].target);
-					}
-				}
-			}
-        })
-	}
 });

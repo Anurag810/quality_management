@@ -7,4 +7,31 @@ import frappe
 from frappe.model.document import Document
 
 class QualityAudit(Document):
-	pass
+
+	def on_update(self):
+		if frappe.utils.nowdate() == self.to_date:
+			query = frappe.db.sql("""SELECT * FROM `tabQuality Action` WHERE audit='"""+self.name+"""'""", as_dict=1)
+
+			if len(query) == 0:
+				if self.status == "Non Conformance":		
+					doc = frappe.get_doc({
+						'doctype': 'Quality Action',
+						'action': 'Corrective',
+						'type': 'Quality Audit',
+						'audit': ''+ self.name +'',
+						'date': ''+ frappe.utils.nowdate() +'',
+						'problem': 'Non-Conformance in Audit '+ self.name +''
+					})
+					doc.insert()
+					doc.name
+			else:
+				if self.status == "Non Conformance":
+					query = frappe.db.sql("""UPDATE `tabQuality Action` SET problem='Non-Conformance in Audit """+ self.name +"""' WHERE audit='"""+self.name+"""'""")
+				else:
+					query = frappe.db.sql("""DELETE FROM `tabQuality Action` WHERE audit='"""+self.name+"""'""")
+		else:
+			pass
+
+	def validate(self):
+		if self.to_date < self.from_date:
+			frappe.throw("From Date can't be grater than To Date")
