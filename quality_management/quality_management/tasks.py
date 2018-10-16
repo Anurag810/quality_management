@@ -19,53 +19,47 @@ def review():
 	day_name = now.strftime("%A")
 	month=now.strftime("%B")
 
-	def get_objective(name):
-		objectives = frappe.get_all("Quality Objective", filters={'parent': ''+ name +''}, fields=['objective', 'target', 'unit'])
-		doc = frappe.get_doc({
-			"doctype": "Quality Review",
-   			"goal": name,
-   			"date": frappe.utils.nowdate(),
-		})
-		for objective in objectives:
-			doc.append("values",{
-				'objective': objective.objective,
-				'target': objective.target,
-				'target_unit': objective.unit,
-				'achieved_unit': objective.unit
-			})
-		doc.insert()
-		frappe.db.commit()
-		return objectives
-
 	for data in frappe.get_all("Quality Goal",fields=['name','frequency','date','weekly']):
 		if data.frequency == 'Daily':
-			objectives = get_objective(data.name)
-			print(objectives)
+			create_review(data.name)
 
 		elif data.frequency == 'Weekly':
 			if data.weekly == day_name:
-				objectives = get_objective(data.name)
-				print(objectives)
+				create_review(data.name)
 
 		elif data.frequency == 'Monthly':
 			if data.date == str(day):
-				objectives = get_objective(data.name)
-				print(objectives)
+				create_review(data.name)
+
 
 		elif data.frequency == 'Quarterly':
 			if (month == 'January' or month == 'April' or month == 'July' or month == 'October') and str(day) == data.date:
-				objectives = get_objective(data.name)
-				print(objectives)
+				create_review(data.name)
 
 		elif data.frequency == 'Half Yearly':
 			if (month == 'January' or month == 'July') and str(day) == data.date:
-				objectives = get_objective(data.name)
-				print(objectives)
+				create_review(data.name)
 
 		elif data.frequency == 'Yearly':
 			if month == data.yearly and str(day) == data.date:
-				objectives = get_objective(data.name)
-				print(objectives)
+				create_review(data.name)
 
 		elif data.frequency == 'None':
 			pass
+
+def create_review(name):
+	objectives = frappe.get_all("Quality Objective", filters={'parent': ''+ name +''}, fields=['objective', 'target', 'unit'])
+	doc = frappe.get_doc({
+		"doctype": "Quality Review",
+   		"goal": name,
+   		"date": frappe.utils.nowdate(),
+	})
+	for objective in objectives:
+		doc.append("values",{
+			'objective': objective.objective,
+			'target': objective.target,
+			'target_unit': objective.unit,
+			'achieved_unit': objective.unit
+		})
+	doc.insert()
+	frappe.db.commit()
