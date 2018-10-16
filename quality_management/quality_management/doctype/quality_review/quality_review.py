@@ -25,18 +25,18 @@ class QualityReview(Document):
 			})
 			for data in problem:
 				doc.append("description",{
-					'problem': data
+					'problem': data,
+					'status': 'Opened'
 				})
 			doc.insert()
 			frappe.db.commit()
 
 	def on_update(self):
-		print("On Update")
 		problem = ''
 		for value in self.values:
 			if int(value.achieved) < int(value.target):
 				problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
-		print(problem)
+
 		if problem != '':
 			problem = filter(None, problem.split("\n"))
 			query = frappe.get_list("Quality Action", filters={"review":""+ self.name +""})
@@ -50,7 +50,8 @@ class QualityReview(Document):
 				})
 				for data in problem:
 					doc.append("description",{
-						'problem': data
+						'problem': data,
+						'status': 'Opened'
 					})
 				doc.insert()
 				frappe.db.commit()
@@ -60,10 +61,12 @@ class QualityReview(Document):
 					frappe.delete_doc("Quality Action Table", ""+ child.name +"")
 				doc = frappe.get_doc("Quality Action", ""+ query[0].name +"")
 				for data in problem:
+					
 					doc.append("description",{
-						'problem': data
+						'problem': data,
+						'status': 'Opened'
 					})
-				doc.save
+				doc.save()
 				frappe.db.commit()
 		else:
 			query = frappe.get_list("Quality Action", filters={"review":""+ self.name +""})
