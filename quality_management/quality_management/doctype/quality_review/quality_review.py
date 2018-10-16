@@ -27,9 +27,9 @@ class QualityReview(Document):
 				doc.append("description",{
 					'problem': data
 				})
-		#doc.save()
-		doc.insert()
-		frappe.db.commit()
+			#doc.save()
+			doc.insert()
+			frappe.db.commit()
 		
 		#query = frappe.get_list("Quality Action", filters={"review":""+ self.name +""})
 		#if len(query) == 0:
@@ -60,23 +60,61 @@ class QualityReview(Document):
 	def on_update(self):
 		print("On Update")
 		problem = ''
-		query = frappe.get_list("Quality Action", filters={"review":""+ self.name +""})
-		print(query[0].name)
-		if len(query) != 0:
-			print("In If")
-			for value in self.values:
-				if int(value.achieved) < int(value.target):
-					problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
+		for value in self.values:
+			if int(value.achieved) < int(value.target):
+				problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
 
-			if problem != '':
-				problem = filter(None, problem.split("\n"))
-				print(problem)
-				doc = frappe.get_doc("Quality Action", ""+ query[0].name +"")
-				print(doc)
-				pass
-#				query = frappe.db.sql("""UPDATE `tabQuality Action` SET problem='"""+ problem +"""' WHERE review='"""+self.name+"""'""")
-			else:
-				pass
-#				query = frappe.db.sql("""DELETE FROM `tabQuality Action` WHERE review='"""+self.name+"""'""")
+		if problem != '':
+			pass
+
 		else:
 			pass
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+				
+		
+		#	query = frappe.get_list("Quality Action", filters={"review":""+ self.name +""})
+		#	print(self.name)
+		#	if len(query) != 0:
+		#		print(query[0].name)
+		#		print("In If")
+		#		for value in self.values:
+		#			if int(value.achieved) < int(value.target):
+		#				problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
+#
+#				if problem != '':
+#					problem = filter(None, problem.split("\n"))
+#					print(problem)
+#					doc = frappe.delete_doc("Quality Action Table", filters={'parent': ''+ query[0].name +''})
+#					doc = frappe.get_doc("Quality Action", ""+ query[0].name +"")
+#					for data in problem:
+#						doc.append("description",{
+#							'problem': data
+#						})
+#					doc.save
+#					frappe.db.commit()
+	#				query = frappe.db.sql("""UPDATE `tabQuality Action` SET problem='"""+ problem +"""' WHERE review='"""+self.name+"""'""")
+#				else:
+#					frappe.delete_doc("Quality Action", ""+ query[0].name +"")
+	#				query = frappe.db.sql("""DELETE FROM `tabQuality Action` WHERE review='"""+self.name+"""'""")
+#			else:
+#				pass
+#		else:
+#			pass
