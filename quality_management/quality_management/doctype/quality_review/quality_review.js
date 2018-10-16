@@ -6,7 +6,9 @@ frappe.ui.form.on('Quality Review', {
 
 	},
 	onload: function(frm){
-		frm.set_value("date", frappe.datetime.get_today())
+		if(frm.doc.date == null){
+			frm.set_value("date", frappe.datetime.get_today());
+		}
 	},
 	goal: function(frm) {
 		if (frm.doc.values != null){

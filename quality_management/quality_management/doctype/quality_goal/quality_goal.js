@@ -6,7 +6,9 @@ frappe.ui.form.on('Quality Goal', {
 
 	},
 	revision: function(frm) {
-		frm.set_value("revised_on", frappe.datetime.get_today())
+		if(frm.doc.revised_on == null){
+			frm.set_value("revised_on", frappe.datetime.get_today());
+		}
 	},
 	frequency: function(frm) {
 		
