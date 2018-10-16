@@ -9,8 +9,6 @@ from frappe.model.document import Document
 class QualityReview(Document):	
 
 	def after_insert(self):
-		print("After Insert")
-		print(self.name)
 		problem = ''
 		for value in self.values:
 			if int(value.achieved) < int(value.target):
@@ -62,8 +60,7 @@ class QualityReview(Document):
 	def on_update(self):
 		print("On Update")
 		problem = ''
-		print(self.name)
-		query = frappe.get_doc("Quality Action", filters={"review":""+ self.name +""})
+		query = frappe.get_list("Quality Action", filters={"review":""+ self.name +""})
 		print(query)
 		if len(query) != 0:
 			print("In If")

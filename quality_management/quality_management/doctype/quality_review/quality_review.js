@@ -9,6 +9,10 @@ frappe.ui.form.on('Quality Review', {
 		frm.set_value("date", frappe.datetime.get_today())
 	},
 	goal: function(frm) {
+		if (frm.doc.values != null){
+			frm.doc.values = [];
+			frm.refresh();
+		}
 		frappe.call({
             "method": "frappe.client.get",
             args: {
