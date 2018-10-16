@@ -61,16 +61,18 @@ class QualityReview(Document):
 		print("On Update")
 		problem = ''
 		query = frappe.get_list("Quality Action", filters={"review":""+ self.name +""})
-		print(query)
+		print(query[0].name)
 		if len(query) != 0:
 			print("In If")
 			for value in self.values:
 				if int(value.achieved) < int(value.target):
 					problem = problem + 'In '+ value.objective +', the Achieved Value '+ str(value.achieved) +' is less than the Target Value '+ str(value.target) +'\n'
 
-			print(problem)
 			if problem != '':
 				problem = filter(None, problem.split("\n"))
+				print(problem)
+				doc = frappe.get_doc("Quality Action", ""+ query[0].name +"")
+				print(doc)
 				pass
 #				query = frappe.db.sql("""UPDATE `tabQuality Action` SET problem='"""+ problem +"""' WHERE review='"""+self.name+"""'""")
 			else:
