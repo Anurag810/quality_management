@@ -66,3 +66,6 @@ def review():
 			if month == data.yearly and str(day) == data.date:
 				objectives = get_objective(data.name)
 				print(objectives)
+
+		elif data.frequency == 'None':
+			pass
