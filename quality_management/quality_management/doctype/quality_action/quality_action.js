@@ -18,8 +18,7 @@ frappe.ui.form.on('Quality Action', {
 		}
 	},
 	review: function(frm){
-		frm.doc.description=[]
-		frm.refresh()
+		var problems = "";
 		frappe.call({
             "method": "frappe.client.get",
             args: {
@@ -29,17 +28,20 @@ frappe.ui.form.on('Quality Action', {
             callback: function (data) {
 				for (var i = 0; i < data.message.values.length; i++ ){
 					if (data.message.values[i].achieved < data.message.values[i].target){
-						frm.add_child("description");
-						frm.fields_dict.description.get_value()[i].problem = ""+ data.message.values[i].objective +"-"+ data.message.values[i].achieved + " " + data.message.values[i].target_unit;
+						problems += data.message.values[i].objective +"-"+ data.message.values[i].achieved + " " + data.message.values[i].target_unit + "\n";
 					}
+				}
+				problems = problems.slice(0, -2);
+				problems= problems.split("\n");
+				for (var i = 0; i < problems.length; i++){
+					frm.add_child("description");
+					frm.fields_dict.description.get_value()[i].problem = problems[i];
 				}
 				frm.refresh();
             }
         })
 	},
 	feedback: function(frm) {
-		frm.doc.description=[]
-		frm.refresh()
 		frappe.call({
 			"method": "frappe.client.get",
 			args: {
@@ -49,7 +51,7 @@ frappe.ui.form.on('Quality Action', {
 			callback: function(data){
 				for (var i = 0; i < data.message.feedback.length; i++ ){
 					frm.add_child("description");
-					frm.fields_dict.description.get_value()[i].problem = ""+ data.message.feedback[i].parameter +"-"+ data.message.feedback[i].qualitative_feedback;
+					frm.fields_dict.description.get_value()[i].problem = data.message.feedback[i].parameter +"-"+ data.message.feedback[i].qualitative_feedback;
 				}
 				frm.refresh();
 			}
