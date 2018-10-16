@@ -12,6 +12,9 @@ frappe.ui.form.on('Customer Feedback', {
 		
 	},
 	template: function(frm){
+		if(frm.doc.feedback != null){
+			frm.doc.feedback = [];
+		}
 		frappe.call({
             "method": "frappe.client.get",
             args: {
