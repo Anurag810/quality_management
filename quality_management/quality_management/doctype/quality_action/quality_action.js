@@ -18,6 +18,8 @@ frappe.ui.form.on('Quality Action', {
 		}
 	},
 	review: function(frm){
+		frm.doc.description=[]
+		frm.refresh()
 		frappe.call({
             "method": "frappe.client.get",
             args: {
@@ -36,6 +38,8 @@ frappe.ui.form.on('Quality Action', {
         })
 	},
 	feedback: function(frm) {
+		frm.doc.description=[]
+		frm.refresh()
 		frappe.call({
 			"method": "frappe.client.get",
 			args: {
@@ -52,6 +56,6 @@ frappe.ui.form.on('Quality Action', {
 		})
 	},
 	type: function(frm){
-		//code to delete table
+		
 	}
 });
