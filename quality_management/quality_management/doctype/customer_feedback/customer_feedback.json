@@ -1,5 +1,6 @@
 {
  "allow_copy": 0, 
+ "allow_events_in_timeline": 0, 
  "allow_guest_to_view": 0, 
  "allow_import": 0, 
  "allow_rename": 0, 
@@ -219,7 +220,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2018-10-15 15:57:03.047336", 
+ "modified": "2018-10-16 17:31:15.460397", 
  "modified_by": "Administrator", 
  "module": "Quality Management", 
  "name": "Customer Feedback", 
