@@ -55,7 +55,9 @@ class QualityReview(Document):
 				doc.insert()
 				frappe.db.commit()
 			else:
-				doc = frappe.delete_doc("Quality Action Table", filters={'parent': ''+ query[0].name +''})
+				child_table = frappe.get_list("Quality Action Table", filters={'parent': ''+ query[0].name +''})
+				for child in child_table:
+					frappe.delete_doc("Quality Action Table", ""+ child.name +"")
 				doc = frappe.get_doc("Quality Action", ""+ query[0].name +"")
 				for data in problem:
 					doc.append("description",{
@@ -65,4 +67,7 @@ class QualityReview(Document):
 				frappe.db.commit()
 		else:
 			query = frappe.get_list("Quality Action", filters={"review":""+ self.name +""})
-			frappe.delete_doc("Quality Action", ""+ query[0].name +"")
+			if len(query) != 0:
+				frappe.delete_doc("Quality Action", ""+ query[0].name +"")
+			else:
+				pass
