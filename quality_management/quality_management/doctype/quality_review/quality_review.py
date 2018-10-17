@@ -13,6 +13,9 @@ class QualityReview(Document):
 			if int(value.achieved) < int(value.target):
 				self.action = "Action Initialised"
 				break
+			else:
+				self.action = "No Action"
+				break
 
 	def after_insert(self):
 		problem = ''
