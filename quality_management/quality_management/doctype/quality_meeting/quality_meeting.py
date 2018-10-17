@@ -7,4 +7,14 @@ import frappe
 from frappe.model.document import Document
 
 class QualityMeeting(Document):
-	pass
+	
+	def validate(self):
+		problem = ''
+		for data in self.minutes:
+			if data.status == 'Open':
+				problem = 'set'
+
+		if problem == 'set':
+			self.status = 'Open'
+		else:
+			self.status = 'Closed'

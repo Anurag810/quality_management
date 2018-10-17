@@ -9,14 +9,17 @@ from frappe.model.document import Document
 class QualityReview(Document):	
 
 	def validate(self):
+		problem = ''
 		for value in self.values:
 			if int(value.achieved) < int(value.target):
-				self.action = "Action Initialised"
-				break
-			else:
-				self.action = "No Action"
+				problem = 'set'
 				break
 
+		if problem == 'set':
+			self.action = 'Action Initialised'
+		else:
+			self.action = 'No Action'
+		
 	def after_insert(self):
 		problem = ''
 		for value in self.values:
