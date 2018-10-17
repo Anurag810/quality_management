@@ -20,7 +20,7 @@ frappe.ui.form.on('Quality Action', {
 	review: function(frm){
 		var problems = "";
 		if (frm.doc.review != null){
-			frm.doc.description = [];
+			frm.fields_dict.description.grid.remove_all()
 			frm.refresh();
 		}
 		frappe.call({
@@ -58,7 +58,7 @@ frappe.ui.form.on('Quality Action', {
 	},
 	feedback: function(frm) {
 		if (frm.doc.feedback != null){
-			frm.doc.description = [];
+			frm.fields_dict.description.grid.remove_all()
 			frm.refresh();
 		}
 		frm.doc.description = [];
@@ -80,7 +80,7 @@ frappe.ui.form.on('Quality Action', {
 	},
 	type: function(frm){
 		if(frm.doc.description != null){
-			frm.doc.description = [];
+			frm.fields_dict.description.grid.remove_all()
 			frm.doc.review = '';
 			frm.doc.feedback = '';
 			frm.doc.goal = '';

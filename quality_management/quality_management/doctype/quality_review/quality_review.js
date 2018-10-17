@@ -12,7 +12,7 @@ frappe.ui.form.on('Quality Review', {
 	},
 	goal: function(frm) {
 		if (frm.doc.values != null){
-			frm.doc.values = [];
+			frm.fields_dict.values.grid.remove_all()
 			frm.refresh();
 		}
 		frappe.call({
