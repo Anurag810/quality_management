@@ -8,6 +8,9 @@ from frappe.model.document import Document
 
 class CustomerFeedback(Document):
 	
+	def before_insert(self):
+		pass
+
 	def after_insert(self):
 		query = frappe.get_list("Quality Action", filters={"feedback": ""+ self.name +""})
 		if len(query) == 0:
