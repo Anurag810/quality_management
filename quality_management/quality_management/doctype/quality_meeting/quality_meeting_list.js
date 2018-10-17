@@ -1,11 +1,11 @@
-frappe.listview_settings['Customer Meeting'] = {
+frappe.listview_settings['Quality Meeting'] = {
 	add_fields: ["status"],
 	get_indicator: function(doc) {
-		if(doc.status == "Opened") {
-			return [__("Opened"), "green", "status=,Opened"];
+		if(doc.status == "Open") {
+			return [__("Open"), "red", "status=,Open"];
 		}
 		else if(doc.status == "Closed") {
-			return [__("Closed"), "red", ",status=,Closed"];
+			return [__("Close"), "green", ",status=,Close"];
 		}		
 	}	
 }
