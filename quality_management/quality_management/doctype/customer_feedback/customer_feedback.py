@@ -9,7 +9,8 @@ from frappe.model.document import Document
 class CustomerFeedback(Document):
 	
 	def before_insert(self):
-		pass
+		for data in self.feedback:
+			print(data.rating)
 
 	def after_insert(self):
 		query = frappe.get_list("Quality Action", filters={"feedback": ""+ self.name +""})
