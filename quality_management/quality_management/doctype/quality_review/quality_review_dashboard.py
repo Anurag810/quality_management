@@ -7,6 +7,10 @@ def get_data():
             {
                 'label': _('Dummy'),
                 'items': ['Quality Action']
+            },
+            {
+                'label': _('Dummy'),
+                'items': ['Quality Meeting']
             }
         ],
     }
