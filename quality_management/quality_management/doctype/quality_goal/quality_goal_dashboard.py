@@ -5,8 +5,12 @@ def get_data():
         'fieldname': 'goal',
         'transactions': [
             {
-                'label': _('Dummy'),
+                'label': _('Review'),
                 'items': ['Quality Review']
+            },
+            {
+               'label': _('Action'),
+                'items': ['Quality Action']
             }
-        ],
+        ]
     }

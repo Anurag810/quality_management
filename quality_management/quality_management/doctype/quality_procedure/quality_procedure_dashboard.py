@@ -5,8 +5,16 @@ def get_data():
         'fieldname': 'procedure',
         'transactions': [
             {
-                'label': _('Dummy'),
-                'items': ['Quality Goal', 'Quality Audit', 'Quality Review']
+                'label': _('Goal'),
+                'items': ['Quality Goal']
+            },
+            {
+                'label': _('Review'),
+                'items': ['Quality Review']
+            },
+            {
+                'label': _('Action'),
+                'items': ['Quality Action']
             }
         ],
     }
