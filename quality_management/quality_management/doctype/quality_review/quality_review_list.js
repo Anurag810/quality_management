@@ -1,11 +1,11 @@
 frappe.listview_settings['Quality Review'] = {
-	add_fields: ["scope"],
+	add_fields: ["action"],
 	get_indicator: function(doc) {
-		if(doc.scope == "Company") {
-			return [__("Company"), "blue", "scope,=,Company"];
+		if(doc.action == "No Action") {
+			return [__("No Action"), "blue", "action,=,No Action"];
 		}
-		else if(doc.scope == "Department") {
-			return [__("Department"), "green", "scope,=,Department"];
+		else if(doc.action == "Action Initialised") {
+			return [__("Action Initialised"), "green", "action,=,Action Initialised"];
 		}		
 	}	
 }
