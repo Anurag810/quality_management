@@ -9,8 +9,7 @@ frappe.listview_settings['Quality Action'] = {
 			return [__("Under Review"), "green", "status,=,Under Review"];
 		}
 		else if(doc.status == "Patched") {
-			return [__("Patched"), "blue", "status,=,Patched"];
-			
+			return [__("Patched"), "blue", "status,=,Patched"];	
 		}
 		if(doc.action == "Corrective") {
 			return [__("Corrective"), "red", "type,=,Corrective"];
@@ -18,6 +17,5 @@ frappe.listview_settings['Quality Action'] = {
 		else if(doc.action == "Preventive") {
 			return [__("Preventive"), "Orange", "type,=,Preventive"];
 		}
-		
 	}	
 }
