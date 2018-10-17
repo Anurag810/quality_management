@@ -30,7 +30,8 @@ class QualityReview(Document):
 				'action': 'Corrective',
 				'type': 'Quality Review',
 				'review': ''+ self.name +'',
-				'date': ''+ frappe.utils.nowdate() +''
+				'date': ''+ frappe.utils.nowdate() +'',
+				'procedure': ''+ self.procedure +''
 			})
 			for data in problem:
 				doc.append("description",{
@@ -55,7 +56,8 @@ class QualityReview(Document):
 					'action': 'Corrective',
 					'type': 'Quality Review',
 					'review': ''+ self.name +'',
-					'date': ''+ frappe.utils.nowdate() +''
+					'date': ''+ frappe.utils.nowdate() +'',
+					'procedure': ''+ self.procedure +''
 				})
 				for data in problem:
 					doc.append("description",{
