@@ -8,6 +8,12 @@ from frappe.model.document import Document
 
 class QualityReview(Document):	
 
+	def before_insert(self):
+		for value in self.values:
+			if int(value.achieved) < int(value.target):
+				self.action = "Action Initialised"
+				break
+
 	def after_insert(self):
 		problem = ''
 		for value in self.values:
@@ -39,6 +45,7 @@ class QualityReview(Document):
 
 		if problem != '':
 			problem = filter(None, problem.split("\n"))
+			self.action = "Action Initialised"
 			query = frappe.get_list("Quality Action", filters={"review":""+ self.name +""})
 			if len(query) == 0:
 				doc = frappe.get_doc({
@@ -70,6 +77,7 @@ class QualityReview(Document):
 				frappe.db.commit()
 		else:
 			query = frappe.get_list("Quality Action", filters={"review":""+ self.name +""})
+			self.action = "No Action"
 			if len(query) != 0:
 				frappe.delete_doc("Quality Action", ""+ query[0].name +"")
 			else:
