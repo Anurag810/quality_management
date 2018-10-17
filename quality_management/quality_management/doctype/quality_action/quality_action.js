@@ -40,6 +40,18 @@ frappe.ui.form.on('Quality Action', {
 					frm.add_child("description");
 					frm.fields_dict.description.get_value()[i].problem = problems[i];
 				}
+				//frm.refresh();
+            }
+		})
+		frappe.call({
+            "method": "frappe.client.get",
+            args: {
+                doctype: "Quality Goal",
+				name: frm.doc.goal
+            },
+            callback: function (data) {
+				console.log(data.message.procedure);
+				frm.doc.procedure = data.message.procedure;
 				frm.refresh();
             }
         })
@@ -71,6 +83,8 @@ frappe.ui.form.on('Quality Action', {
 			frm.doc.description = [];
 			frm.doc.review = '';
 			frm.doc.feedback = '';
+			frm.doc.goal = '';
+			frm.doc.procedure = '';
 			frm.refresh();
 		}
 	}
