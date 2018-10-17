@@ -17,4 +17,4 @@ class QualityMeeting(Document):
 		if problem == 'set':
 			self.status = 'Open'
 		else:
-			self.status = 'Closed'
+			self.status = 'Close'
