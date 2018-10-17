@@ -12,12 +12,5 @@ frappe.listview_settings['Quality Action'] = {
 			return [__("Patched"), "blue", "status,=,Patched"];
 			
 		}
-		if(doc.action == "Corrective") {
-			return [__("Corrective"), "red", "type,=,Corrective"];
-		}
-		else if(doc.action == "Preventive") {
-			return [__("Preventive"), "Orange", "type,=,Preventive"];
-		}
-		
 	}	
 }
