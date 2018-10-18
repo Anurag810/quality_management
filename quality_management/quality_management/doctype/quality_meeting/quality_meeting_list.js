@@ -4,7 +4,7 @@ frappe.listview_settings['Quality Meeting'] = {
 		if(doc.status == "Open") {
 			return [__("Open"), "red", "status=,Open"];
 		}
-		else if(doc.status == "Closed") {
+		else if(doc.status == "Close") {
 			return [__("Close"), "green", ",status=,Close"];
 		}		
 	}	
